@@ -5,7 +5,9 @@
 }
 
 <div>
-    <h1 class="display-4 text-center">Fizzbuzz</h1>
+    <h1 class="display-4 text-center">
+        @(string.IsNullOrEmpty(Model.Result)?"Formularz":Model.Result)
+    </h1>
     <form method="GET">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
