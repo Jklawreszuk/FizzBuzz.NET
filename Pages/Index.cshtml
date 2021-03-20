@@ -14,7 +14,12 @@
             <input asp-for="FizzBuzz.Number" class="form-control" />
             <span asp-validation-for="FizzBuzz.Number" class="font-weight-bold text-danger"></span>
         </div>
-        
-        <input type="submit" class="btn btn-success" value="Sprawdź"/>
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Sprawdź" />
+        </div>
     </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
