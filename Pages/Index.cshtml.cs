@@ -16,17 +16,6 @@ namespace FizzBuzzNET.Pages
         public FizzBuzz FizzBuzz { get; set; }
         public string Result { get; set; }
 
-        private string GiveAnswer(int number){
-            string result = string.Empty;
-            if (number %3==0 ){
-                result += "Fizz";
-            }
-            if (number %5==0){
-                result += "Buzz";
-            }
-
-            return (result == string.Empty ? $"{number}" : result);
-        }
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
@@ -39,7 +28,7 @@ namespace FizzBuzzNET.Pages
         { 
             if(ModelState.IsValid)
             {
-                Result = GiveAnswer(FizzBuzz.Number);
+                Result = FizzBuzz.GetAnswer();
                 //Wynik ostatniego formularza zapisuje w formie krotki
                 HttpContext.Session.SetString("RecentFizzBuzz",JsonConvert.SerializeObject((FizzBuzz.Number,Result,DateTime.Now)));
                 
