@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Logging;
 using FizzBuzzNET.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace FizzBuzzNET.Pages
 {
@@ -16,10 +19,10 @@ namespace FizzBuzzNET.Pages
         private string GiveAnswer(int number){
             string result = string.Empty;
             if (number %3==0 ){
-                result += "fizz";
+                result += "Fizz";
             }
             if (number %5==0){
-                result += "buzz";
+                result += "Buzz";
             }
 
             return (result == string.Empty ? $"{number}" : result);
@@ -36,7 +39,9 @@ namespace FizzBuzzNET.Pages
         { 
             if(ModelState.IsValid)
             {
-                Result = GiveAnswer(FizzBuzz.Number); 
+                Result = GiveAnswer(FizzBuzz.Number);
+                //Wynik ostatniego formularza zapisuje w formie krotki
+                HttpContext.Session.SetString("RecentFizzBuzz",JsonConvert.SerializeObject((FizzBuzz.Number,Result,DateTime.Now)));
                 
             }
         }
