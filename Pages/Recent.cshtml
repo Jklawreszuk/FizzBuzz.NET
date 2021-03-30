@@ -3,35 +3,3 @@
 @{
     ViewData["Title"] = "Ostatnio Szukane";
 }
-<h1>@ViewData["Title"]</h1>
-
-
-@{
-    string sessionAsString = HttpContext.Session.GetString("RecentFizzBuzz");
-}
-
-@if (sessionAsString!=null)
-{
-    var recentForm = JsonConvert.DeserializeObject<(int, string, DateTime)>(sessionAsString);
-    <table class="table">
-        <thead class="table-dark">
-            <tr>
-                <th>Podana liczba</th>
-                <th>Odpowiedź</th>
-                <th>Czas</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@recentForm.Item1</td>
-                <td>@recentForm.Item2</td>
-                <td>@recentForm.Item3</td>
-            </tr>
-        </tbody>
-    </table>
-
-}
-else
-{
-    <p>Brak wyników</p>
-}
