@@ -21,7 +21,7 @@ namespace FizzBuzzNET.Pages
 
         public void OnGet()
         {
-            Records = _fizzBuzzContext.FizzBuzzRecords.ToList();
+            Records = _fizzBuzzContext.FizzBuzzRecords.OrderByDescending(f => f.Time).Take(10).ToList();
         }
     }
 }
