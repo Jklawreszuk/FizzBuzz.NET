@@ -4,15 +4,16 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace FizzBuzzNET.Models
 {
-    [Required]
+    
     public class FizzBuzzRecord
     {   
         public int ID { get; set; }
+        [Required]
         public DateTime Time { get; set; }
 
-        [MaxLength(8)]
+        [Required,MaxLength(8)]
         public string Result { get; set; }
-        [Range(1,1000)]
+        [Required,Range(1,1000)]
         public int Number { get; set; }
     }
 }

@@ -3,3 +3,12 @@
 @{
     ViewData["Title"] = "Ostatnio Szukane";
 }
+@if(Model.Records!=null){
+    
+    @foreach (var item in Model.Records)
+    {
+        <p>@item.Number</p>
+        <p>@item.Result</p>
+        <p>@item.Time</p>
+    }
+}
