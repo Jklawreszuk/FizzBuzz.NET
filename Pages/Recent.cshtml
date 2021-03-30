@@ -3,12 +3,32 @@
 @{
     ViewData["Title"] = "Ostatnio Szukane";
 }
-@if(Model.Records!=null){
-    
-    @foreach (var item in Model.Records)
-    {
-        <p>@item.Number</p>
-        <p>@item.Result</p>
-        <p>@item.Time</p>
-    }
+
+@if (Model.Records!=null)
+{
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Podana liczba</th>
+                <th>Odpowiedź</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Records)
+        {
+            <tbody>
+                <tr>
+                    <td>@item.Number</td>
+                    <td>@item.Result</td>
+                    <td>@item.Time</td>
+                </tr>
+            </tbody>
+        }
+        
+    </table>
+
+}
+else
+{
+    <h1>Brak wyników</h1>
 }
