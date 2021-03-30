@@ -8,7 +8,7 @@
     <h1 class="display-4 text-center">
         @(string.IsNullOrEmpty(Model.Result)?"Formularz":Model.Result)
     </h1>
-    <form method="GET">
+    <form method="POST">
         <div class="form-group">
             <label asp-for="FizzBuzz.Number">Podaj liczbę</label>
             <input asp-for="FizzBuzz.Number" class="form-control" />

@@ -20,11 +20,7 @@ namespace FizzBuzzNET.Pages
         {
             _logger = logger;
         }
-
-
-
-        /* Note: Uznałem że nie ma potrzeby przesyłania danych metodą POST,ponieważ stworzony przeze mnie formularz nie zawiera danych wrażliwych */
-        public void OnGet()
+        public void OnPost()
         { 
             if(ModelState.IsValid)
             {
