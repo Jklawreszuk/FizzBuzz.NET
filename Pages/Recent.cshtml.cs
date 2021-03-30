@@ -11,10 +11,5 @@ namespace FizzBuzzNET.Pages
         {
             _logger = logger;
         }
-
-        public void OnGet()
-        {
-            
-        }
     }
 }
