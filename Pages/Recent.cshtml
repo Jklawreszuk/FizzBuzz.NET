@@ -6,21 +6,28 @@
 
 @if(Model.Records?.Count>0)
 {
-    <table class="table">
-        <thead class="table-dark">
+    <table class="table table-hover">
+        <thead class="thead-dark">
             <tr>
                 <th>Podana liczba</th>
                 <th>Odpowiedź</th>
                 <th>Data</th>
+                <th></th>
             </tr>
         </thead>
         @foreach (var item in Model.Records)
         {
-            <tbody>
+            <tbody class="table-hover">
                 <tr>
                     <td>@item.Number</td>
                     <td>@item.Result</td>
                     <td>@item.Time</td>
+                    <td>
+                        <form id="deleteForm" method="POST">
+                            <input type="hidden" asp-for="rowID" value="@item.ID"/>
+                            <a href="#" onclick="javascript:$('#deleteForm').submit()">Usuń rekord</a>
+                        </form>
+                    </td>    
                 </tr>
             </tbody>
         }
