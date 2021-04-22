@@ -1,5 +1,7 @@
+using FizzBuzzNET.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,7 @@ namespace FizzBuzzNET
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+            services.AddDbContext<FizzBuzzContext>(opt=>opt.UseSqlite("DataSource=Data/FizzBuzz.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
