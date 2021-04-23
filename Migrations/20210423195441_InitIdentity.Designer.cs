@@ -3,14 +3,16 @@ using System;
 using FizzBuzzNET.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FizzBuzzNET.Migrations
 {
     [DbContext(typeof(FizzBuzzContext))]
-    partial class FizzBuzzContextModelSnapshot : ModelSnapshot
+    [Migration("20210423195441_InitIdentity")]
+    partial class InitIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

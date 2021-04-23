@@ -30,7 +30,7 @@ namespace FizzBuzzNET
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-            services.AddDbContext<FizzBuzzContext>(opt=>opt.UseSqlite("DataSource=Data/FizzBuzz.db"));
+            services.AddDbContext<FizzBuzzContext>(opt=>opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Collections.Generic;
 using FizzBuzzNET.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FizzBuzzNET.Pages
 {
+    [Authorize]
     public class RecentModel : PageModel
     {
         private readonly ILogger<RecentModel> _logger;
