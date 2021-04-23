@@ -15,17 +15,17 @@
                 <th></th>
             </tr>
         </thead>
-        @foreach (var item in Model.Records)
+        @for(int i=0;i<Model.Records.Count;i++)
         {
             <tbody class="table-hover">
                 <tr>
-                    <td>@item.Number</td>
-                    <td>@item.Result</td>
-                    <td>@item.Time</td>
+                    <td>@Model.Records[i].Number</td>
+                    <td>@Model.Records[i].Result</td>
+                    <td>@Model.Records[i].Time</td>
                     <td>
-                        <form id="deleteForm" method="POST">
-                            <input type="hidden" asp-for="rowID" value="@item.ID"/>
-                            <a href="#" onclick="javascript:$('#deleteForm').submit()">Usuń rekord</a>
+                        <form id="deleteForm@(i)" method="POST">
+                            <input type="hidden" asp-for="rowID" value="@Model.Records[i].ID"/>
+                            <a href="#" onclick="javascript:$('#deleteForm@(i)').submit()">Usuń rekord</a>
                         </form>
                     </td>    
                 </tr>
