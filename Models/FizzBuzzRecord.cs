@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Identity;
 
 namespace FizzBuzzNET.Models
 {
@@ -15,5 +15,8 @@ namespace FizzBuzzNET.Models
         public string Result { get; set; }
         [Required,Range(1,1000)]
         public int Number { get; set; }
+
+        public string RecordUserId { get; set; }
+        public virtual IdentityUser RecordUser {get;set;}
     }
 }

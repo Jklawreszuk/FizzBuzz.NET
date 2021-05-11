@@ -4,8 +4,10 @@ using FizzBuzzNET.Data;
 using System.Linq;
 using System.Collections.Generic;
 using FizzBuzzNET.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace FizzBuzzNET.Pages
 {
@@ -27,12 +29,20 @@ namespace FizzBuzzNET.Pages
 
         public void OnGet()
         {
-            Records = _fizzBuzzContext.FizzBuzzRecords.OrderByDescending(f => f.Time).Take(20).ToList();
+            Records = _fizzBuzzContext.FizzBuzzRecords.OrderByDescending(f=>f.Time).Take(20).ToList();
+
         }
         public IActionResult OnPost()
         {
-            _fizzBuzzContext.Remove(new FizzBuzzRecord(){ID=rowID});
-            _fizzBuzzContext.SaveChanges();
+            var q = _fizzBuzzContext.FizzBuzzRecords.Where(n=>(n.ID==rowID) && (n.RecordUser.Id==User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            
+            if(q.Count()>0)
+            {
+                
+                _fizzBuzzContext.Remove(new FizzBuzzRecord(){ID=rowID});
+                _fizzBuzzContext.SaveChanges();
+            }
+            
             return RedirectToPage();
         }
     }

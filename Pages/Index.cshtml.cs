@@ -4,6 +4,7 @@ using FizzBuzzNET.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 using FizzBuzzNET.Data;
 
@@ -13,15 +14,19 @@ namespace FizzBuzzNET.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private FizzBuzzContext _fizzBuzzContext;
+        private UserManager<IdentityUser> _userManager;
+        private SignInManager<IdentityUser> _signInManager;
         
         [BindProperty(SupportsGet = true)]
         public FizzBuzz FizzBuzz { get; set; }
         public string Result { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger,FizzBuzzContext fizzBuzzContext)
+        public IndexModel(ILogger<IndexModel> logger,FizzBuzzContext fizzBuzzContext,UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
             _fizzBuzzContext=fizzBuzzContext;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
         public void OnPost()
         { 
@@ -31,8 +36,19 @@ namespace FizzBuzzNET.Pages
                 //Wynik ostatniego formularza zapisuje w formie krotki
                 HttpContext.Session.SetString("RecentFizzBuzz",JsonConvert.SerializeObject((FizzBuzz.Number,Result,DateTime.Now)));
 
-                _fizzBuzzContext.Add(new FizzBuzzRecord(){Number=FizzBuzz.Number,Time=DateTime.Now,Result=FizzBuzz.GetAnswer()});
-                _fizzBuzzContext.SaveChanges();
+                if(_signInManager.IsSignedIn(User)){
+                    var fizzRec = new FizzBuzzRecord(){
+                        Number=FizzBuzz.Number,Time=DateTime.Now,Result=FizzBuzz.GetAnswer(),
+                        RecordUser =  _userManager.FindByNameAsync(User.Identity.Name).Result
+                    
+                    
+                    };
+                    _fizzBuzzContext.Add(fizzRec);
+
+                
+                    _fizzBuzzContext.SaveChanges();
+                }
+                
                 
             }
         }
